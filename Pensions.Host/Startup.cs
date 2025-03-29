@@ -49,6 +49,7 @@ namespace Pensions.Host
             app.UseSwaggerUI(c => {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Pensions API v1");
             });
+            
             app.UpdateDatabase();
         }
     }

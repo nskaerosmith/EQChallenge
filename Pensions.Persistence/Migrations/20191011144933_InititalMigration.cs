@@ -40,6 +40,21 @@ namespace Pensions.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Results",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    BasicId = table.Column<int>(nullable: false),
+                    Value = table.Column<string>(nullable: true),
+                    DateOfCalculation = table.Column<DateTime>(nullable: false),
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Basic", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Scheme",
                 columns: table => new
                 {

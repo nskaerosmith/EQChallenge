@@ -12,6 +12,7 @@ namespace Pensions.DependencyInjection
             CreateMap<Persistence.Entities.Basic, Basic>();
             CreateMap<Persistence.Entities.Salary, Salary>();
             CreateMap<Persistence.Entities.Service, Service>();
+            CreateMap<Persistence.Entities.Results, Results>();
         }
     }
 }

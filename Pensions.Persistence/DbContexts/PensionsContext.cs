@@ -15,6 +15,7 @@ namespace Pensions.Persistence.DbContexts
         public DbSet<Salary> SalaryHistory { get; set; }
         public DbSet<Service> ServiceHistory { get; set; }
         public DbSet<Accrual> Accrual { get; set; }
+        public DbSet<Results> Results { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
