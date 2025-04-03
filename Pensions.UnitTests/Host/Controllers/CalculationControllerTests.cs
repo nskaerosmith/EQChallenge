@@ -1,6 +1,8 @@
 ﻿using AutoFixture;
+using Castle.Core.Logging;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Moq;
 using Pensions.Core.Models;
 using Pensions.Core.Services.Interfaces;
@@ -19,11 +21,13 @@ namespace Pensions.UnitTests.Host.Controllers
     {
         private readonly Mock<IBasicService> _basicService;
         private readonly Mock<IPensionService> _pensionService;
+        private readonly Mock<ILogger<CalculationController>> _logger;
 
         public CalculationControllerTests()
         {
             _basicService = new Mock<IBasicService>();
             _pensionService = new Mock<IPensionService>();
+            _logger = new Mock<ILogger<CalculationController>>();
         }
 
         [Fact]
@@ -32,7 +36,7 @@ namespace Pensions.UnitTests.Host.Controllers
             var list = new Fixture().CreateMany<Basic>();
             var firstBasic = list.FirstOrDefault();
             _basicService.Setup(x => x.GetByIdAsync(It.IsAny<int>())).ReturnsAsync(firstBasic);
-            var controller = new CalculationController(_pensionService.Object,_basicService.Object);
+            var controller = new CalculationController(_pensionService.Object,_basicService.Object,_logger.Object);
 
             var actionResult = await controller.GetAsync(1);
 
@@ -45,7 +49,7 @@ namespace Pensions.UnitTests.Host.Controllers
             var list = new Fixture().CreateMany<Basic>();
             Basic firstBasic = null;
             _basicService.Setup(x => x.GetByIdAsync(It.IsAny<int>())).ReturnsAsync(firstBasic);
-            var controller = new CalculationController(_pensionService.Object, _basicService.Object);
+            var controller = new CalculationController(_pensionService.Object, _basicService.Object,_logger.Object);
 
             var actionResult = await controller.GetAsync(0);
 
